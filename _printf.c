@@ -45,7 +45,7 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 		case 'c':
 			num_chars_printed += print_char(va_arg(arg_list, int));
 			break;
-		case 's':
+		case 'S':
 		case 's':
 			num_chars_printed += print_string(va_arg(arg_list, char *));
 			break;
@@ -74,9 +74,7 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 			num_chars_printed += printf("%p", va_arg(arg_list, void*));
 			break;
 		default:
-			putchar('%');
-			putchar(**format);
-			num_chars_printed += 2;
+			num_chars_printed += printf("%%%c", **format);
 			break;
 	}
 	return (num_chars_printed);
