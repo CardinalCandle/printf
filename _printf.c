@@ -41,11 +41,15 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 
 	switch (**format)
 	{
+		case 'C':
 		case 'c':
 			num_chars_printed += print_char(va_arg(arg_list, int));
 			break;
 		case 's':
+		case 's':
 			num_chars_printed += print_string(va_arg(arg_list, char *));
+			break;
+		case '\0':
 			break;
 		case '%':
 			putchar('%');
