@@ -38,6 +38,7 @@ int _printf(const char *format, ...)
 int handle_conversion_specifier(const char **format, va_list arg_list)
 {
 	int num_chars_printed = 0;
+	unsigned int i;
 
 	switch (**format)
 	{
@@ -57,7 +58,8 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 			num_chars_printed += printf("%d", va_arg(arg_list, int));
 			break;
 		case 'u':
-			num_chars_printed += printf("%u", va_arg(arg_list, unsigned int));
+			i = (unsigned int) va_arg(arg_list, unsigned int);
+			num_chars_printed += printf("%u", i);
 			break;
 		case 'o':
 			num_chars_printed += printf("%o", va_arg(arg_list, int));
