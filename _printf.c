@@ -86,8 +86,8 @@ int print_str(va_list args, int printed)
 }
 
 /**
- * printf_integer - prints intiger number
- * @args: number arguements
+ * printf_integer - prints integer
+ * @args: # of arguments
  * @printed: the printed characters
  * Return: printed charcaters
  */
