@@ -15,4 +15,7 @@ int print_char(char c);
 int print_string(char *str);
 int handle_specifier(char specifier, va_list ap);
 int print_unknown_specifier(char c);
+
+void reverse(char s[]);
+void _itoa(int n);
 #endif

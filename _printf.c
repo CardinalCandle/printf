@@ -1,89 +1,115 @@
 #include "main.h"
-
 /**
- * help - check the code
- * @c: param
- *
- * Return: ...
+ * _printf - very simple printf implementation
+ * @format: string
+ * Return: number of characters printed
  */
-
-int help(char c)
-{
-	write(1, "%", 1);
-	write(1, &c, 1);
-	return (2);
-}
-
-/**
- * s_handler - check the code
- * @s: param
- *
- * Return: ...
- */
-
-int s_handler(char *s)
-{
-	if (s == NULL)
-		return (write(1, "(null)", 6));
-	return (write(1, s, _strlen(s)));
-}
-
-/**
- * c_handler - check the code
- * @s: param
- *
- * Return: ...
- */
-
-int c_handler(char s)
-{
-	return (write(1, &s, 1));
-}
-
-/**
- * _printf - check the code
- * @format: param
- *
- * Return: ...
- */
-
 int _printf(const char *format, ...)
 {
-	int i;
-	int len;
-	char *s;
-	va_list ap;
+	va_list arg_list;
+	int num_chars_printed = 0;
 
-	i = 0;
-	len = 0;
-	va_start(ap, format);
-	if (!format)
-		return (-1);
-	while (format[i])
+	va_start(arg_list, format);
+
+	for (; *format != '\0'; format++)
 	{
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			i++;
-			if (format[i] == 's' || format[i] == 'S')
-				len += s_handler(va_arg(ap, char *));
-			else if (format[i] == 'c' || format[i] == 'C')
-				len += c_handler(va_arg(ap, int));
-			else if (format[i] == 'i' || format[i] == 'd')
-			{
-				s = _itoa(va_arg(ap, int));
-				len += write(1, s, _strlen(s));
-			}
-			else if (format[i] == '%')
-				len += write(1, "%", 1);
-			else if (format[i] == '\0')
-				i--;
+			format++;
+			if (*format == '\0')
+				format--;
 			else
-				len += help(format[i]);
+				num_chars_printed += handle_conversion_specifier(&format, arg_list);
 		}
 		else
-			len += write(1, &format[i], 1);
-		i++;
+		{
+			putchar(*format);
+			num_chars_printed++;
+		}
 	}
-	va_end(ap);
-	return (len);
+
+	va_end(arg_list);
+	return (num_chars_printed);
+}
+
+/**
+ * handle_conversion_specifier - handles conversion specifier
+ * @format: string
+ * @arg_list: variable argument list
+ * Return: number of characters printed
+ */
+int handle_conversion_specifier(const char **format, va_list arg_list)
+{
+	unsigned int i, num_chars_printed = 0;
+
+	switch (**format)
+	{
+		case 'C':
+		case 'c':
+			num_chars_printed += print_char(va_arg(arg_list, int));
+			break;
+		case 'S':
+		case 's':
+			num_chars_printed += print_string(va_arg(arg_list, char *));
+			break;
+		case 'd':
+		case 'i':
+			num_chars_printed += printf("%d", va_arg(arg_list, int));
+			break;
+		case 'u':
+			i = (unsigned int) va_arg(arg_list, unsigned int);
+			num_chars_printed += printf("%u", i);
+			break;
+		case 'o':
+			num_chars_printed += printf("%o", va_arg(arg_list, int));
+			break;
+		case 'X':
+		case 'x':
+			num_chars_printed += printf("%x", va_arg(arg_list, int));
+			break;
+		case 'p':
+			num_chars_printed += printf("%p", va_arg(arg_list, void*));
+			break;
+		default :
+			write(1, "%", 1);
+			write(1, *format, 1);
+			num_chars_printed += 1;
+			break;
+	}
+	return (num_chars_printed);
+}
+/**
+ * print_char - print a character and handle null characters
+ * @c: the character to print
+ * Return: number of characters printed
+ */
+int print_char(char c)
+{
+	if (c)
+		putchar(c);
+	return (1);
+}
+
+/**
+ * print_string - prints a string
+ * @str: string to print
+ * Return: number of characters printed
+ */
+int print_string(char *str)
+{
+	int i, num_chars_printed = 0;
+
+	if (str == NULL)
+	{
+		num_chars_printed += printf("(null)");
+		return (num_chars_printed);
+	}
+
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		num_chars_printed += print_char(str[i]);
+	}
+
+	return (num_chars_printed);
 }
