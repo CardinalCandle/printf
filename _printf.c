@@ -3,7 +3,7 @@
 /**
 * handle_specifier - selects the appropriate specifiers
 * @args: number of arguements
-* @p: the printed characters
+* @printed: the printed characters
 * @format: the format specifier
 * Return: printed characters
 */
@@ -102,7 +102,7 @@ int print_str(va_list args, int printed)
 }
 
 /**
- * printf_integer - prints integer
+ * print_int - prints integer
  * @args: # of arguments
  * @printed: the printed characters
  * Return: printed charcaters
@@ -121,8 +121,7 @@ int print_int(va_list args, int printed)
 		temp = num;
 	}
 
-	do
-	{
+	do {
 		d++;
 		temp /= 10;
 	} while (temp != 0);
