@@ -1,71 +1,127 @@
-#include <stdarg.h>
-#include <unistd.h>
-int print_char(va_list args)
+#include "main.h"
+
+/**
+* handle_specifier - selects the appropriate specifiers
+* @args: number of arguements
+* @p: the printed characters
+* @format: the format specifier
+* Return: printed characters
+*/
+int handle_specifier(const char *format, va_list args, int printed)
 {
-	char c = (char) va_arg(args, int);
-	return write(1, &c, 1);
+	switch (*format)
+	{
+		case 'd':
+		case 'i':
+			printed = print_int(args, printed);
+			break;
+		case 'c':
+			_putchar(va_arg(args, int));
+			printed++;
+			break;
+		case 'S':
+		case 's':
+			printed = print_str(args, printed);
+			break;
+		case '%':
+			_putchar('%');
+			printed++;
+			break;
+		default:
+			break;
+	}
+	return (printed);
 }
 
-int print_str(va_list args)
-{
-	char *str = va_arg(args, char *);
-	int count = 0;
-	for (int i = 0; str[i] != '\0'; i++)
-		count += write(1, &str[i], 1);
-	return count;
-}
-
-int print_int(va_list args)
-{
-    int n = va_arg(args, int);
-    char str[11];
-    int i = 0, count = 0;
-    if (n < 0)
-    {
-        count += write(1, "-", 1);
-        n = -n;
-    }
-    while (n > 9)
-    {
-        str[i++] = n % 10 + '0';
-        n /= 10;
-    }
-    str[i++] = n + '0';
-    while (--i >= 0)
-        count += write(1, &str[i], 1);
-    return count;
-}
-
+/**
+ * _printf - implementation of the inbuilt printf
+ * @format: the format specifier
+ * Return: the formated string
+ */
 int _printf(const char *format, ...)
 {
-    va_list args;
-    va_start(args, format);
-    int count = 0;
-    for (int i = 0; format[i] != '\0'; i++)
-    {
-        if (format[i] == '%')
-        {
-            i++;
-            switch (format[i])
-            {
-                case 'c':
-                    count += print_char(args);
-                    break;
-                case 's':
-                    count += print_str(args);
-                    break;
-                case '%':
-                    count += write(1, &format[i], 1);
-                    break;
-                case 'd':
-                case 'i':
-                    count += print_int(args);
-                    break;
-            }
-        }
-        else
-            count += write(1, &format[i], 1);
-    }
-    va_end(args);
-    return count;
+	int printed = 0;
+
+	va_list args;
+
+	va_start(args, format);
+
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			printed = handle_specifier(format, args, printed);
+			format++;
+		}
+		else
+		{
+			_putchar(*format);
+			printed++;
+			format++;
+		}
+	}
+	va_end(args);
+	return (printed);
+	}
+
+/**
+ * print_str - prints a string
+ * @args: number of arguments
+ * @printed: number of printed characters
+ * Return: printed characters
+ */
+
+int print_str(va_list args, int printed)
+{
+	char *s = va_arg(args, char *);
+
+	while (*s != '\0')
+	{
+		_putchar(*s);
+		printed++;
+		s++;
+	}
+	return (printed);
+}
+
+/**
+ * printf_integer - prints intiger number
+ * @args: number arguements
+ * @printed: the printed characters
+ * Return: printed charcaters
+ */
+
+int print_int(va_list args, int printed)
+{
+	int num = va_arg(args, int);
+	int temp = num;
+	int d = 0, pow10, i;
+
+	if (num < 0)
+	{
+		printed += _putchar('-');
+		num = -num;
+		temp = num;
+	}
+
+	do
+	{
+		d++;
+		temp /= 10;
+	} while (temp != 0);
+
+	while (d > 0)
+	{
+		pow10 = 1;
+		for (i = 1; i < d; i++)
+		{
+			pow10 *= 10;
+		}
+		d = num / pow10;
+		printed += _putchar(d + '0');
+		num -= d * pow10;
+		d--;
+	}
+	return (printed);
 }

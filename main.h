@@ -9,17 +9,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
+int _putchar(char c);
+int handle_specifier(const char *format, va_list args, int printed);
 int _printf(const char *format, ...);
-int handle_conversion_specifier(const char **format, va_list arg_list);
-int print_char(char c);
-int print_string(char *str);
-int handle_specifier(char specifier, va_list ap);
-int print_unknown_specifier(char c);
-
-int print_char(va_list args);
-int print_str(va_list args);
-int print_int(va_list args);
-
-void reverse(char s[]);
-void _itoa(int n);
+int print_str(va_list args, int printed);
+int print_int(va_list args, int printed);
 #endif
