@@ -52,8 +52,7 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 		case '\0':
 			break;
 		case '%':
-			putchar('%');
-			num_chars_printed++;
+			num_chars_printed += printf("%c", '%');
 			break;
 		case 'd':
 		case 'i':
