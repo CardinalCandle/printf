@@ -85,7 +85,7 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 int print_char(char c)
 {
 	if (c)
-		write(1, &c, 1);
+		putchar(c);
 	return (1);
 }
 
