@@ -38,9 +38,6 @@ int _printf(const char *format, ...)
 int handle_conversion_specifier(const char **format, va_list arg_list)
 {
 	int num_chars_printed = 0;
-	char c[3];
-
-	c[0] = '%', c[1] = **format, c[2] = '\0';
 
 	switch (**format)
 	{
@@ -60,7 +57,7 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 			num_chars_printed += printf("%d", va_arg(arg_list, int));
 			break;
 		case 'u':
-			num_chars_printed += printf("%u", va_arg(arg_list, int));
+			num_chars_printed += printf("%u", va_arg(arg_list, unsigned));
 			break;
 		case 'o':
 			num_chars_printed += printf("%o", va_arg(arg_list, int));
@@ -73,7 +70,9 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
 			num_chars_printed += printf("%p", va_arg(arg_list, void*));
 			break;
 		default:
-			num_chars_printed += printf("%s", c);
+			putchar('%');
+			putchar(**format);
+			num_chars_printed += 2;
 			break;
 	}
 	return (num_chars_printed);
