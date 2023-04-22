@@ -84,17 +84,9 @@ int handle_conversion_specifier(const char **format, va_list arg_list)
  */
 int print_char(char c)
 {
-	if (c == '\0')
-	{
-		putchar('\\');
-		putchar('0');
-		return (2);
-	}
-	else
-	{
+	if (c)
 		putchar(c);
-		return (1);
-	}
+	return (1);
 }
 
 /**
