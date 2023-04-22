@@ -65,6 +65,22 @@ int _printf(const char *format, ...)
 	return (printed);
 	}
 
+
+
+/**
+ * print_char - prints binary
+ * @args: arguments
+ * @printed: the printed characters
+ * Return: # of printed chars
+ */
+int print_char(va_list args, int printed)
+{
+	int c = va_arg(args, int);
+
+	_putchar(c);
+	return (++printed);
+}
+
 /**
  * print_str - prints a string
  * @args: number of arguments
