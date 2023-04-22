@@ -14,4 +14,5 @@ int handle_specifier(const char *format, va_list args, int printed);
 int _printf(const char *format, ...);
 int print_str(va_list args, int printed);
 int print_int(va_list args, int printed);
+int print_char(va_list args, int printed);
 #endif
