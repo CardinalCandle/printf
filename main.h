@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <limits.h>
+#include <unistd.h>
 int _printf(const char *format, ...);
 int handle_conversion_specifier(const char **format, va_list arg_list);
 int print_char(char c);
