@@ -1,0 +1,15 @@
+_printf.c
+_putchar.c
+main.c
+main.h
+man_3_printf
+printf_binary.c
+printf_char.c
+printf_hex.c
+printf_integer.c
+printf_octal.c
+printf_pointer.c
+printf_reverse.c
+printf_string.c
+printf_unsigned.c
+switch.c
