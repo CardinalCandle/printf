@@ -1,114 +1,77 @@
 #include "main.h"
-/**
- * _printf - very simple printf implementation
- * @format: string
- * Return: number of characters printed
- */
+
+int handle_specifier(char specifier, va_list ap)
+{
+    int len = 0;
+
+    switch (specifier)
+    {
+        case 's':
+        case 'S':
+            len += print_string(va_arg(ap, char *));
+            break;
+        case 'c':
+        case 'C':
+            len += print_char(va_arg(ap, int));
+            break;
+        case 'i':
+        case 'd':
+            len += printf("%i", va_arg(ap, int));
+            break;
+        case '%':
+            len += write(1, "%", 1);
+            break;
+        default:
+            len += print_unknown_specifier(specifier);
+    }
+
+    return len;
+}
+
+int print_unknown_specifier(char c)
+{
+    write(1, "%", 1);
+    write(1, &c, 1);
+    return (2);
+}
+
+int print_string(char *s)
+{
+    if (s == NULL)
+        return (write(1, "(null)", 6));
+    return (write(1, s, strlen(s)));
+}
+
+int print_char(char s)
+{
+    return (write(1, &s, 1));
+}
+
 int _printf(const char *format, ...)
 {
-	va_list arg_list;
-	int num_chars_printed = 0;
+    int i = 0;
+    int len = 0;
+    va_list ap;
 
-	va_start(arg_list, format);
+    va_start(ap, format);
+    if (!format)
+        return (-1);
 
-	for (; *format != '\0'; format++)
-	{
-		if (*format == '%')
-		{
-		format++;
-		num_chars_printed += handle_conversion_specifier(&format, arg_list);
-		}
-		else
-		{
-			putchar(*format);
-			num_chars_printed++;
-		}
-	}
+    while (format[i])
+    {
+        if (format[i] == '%')
+        {
+            i++;
+            if (format[i] == '\0')
+                i--;
+            else
+                len += handle_specifier(format[i], ap);
+        }
+        else
+            len += write(1, &format[i], 1);
+        i++;
+    }
 
-	va_end(arg_list);
-	return (num_chars_printed);
-}
-
-/**
- * handle_conversion_specifier - handles conversion specifier
- * @format: string
- * @arg_list: variable argument list
- * Return: number of characters printed
- */
-int handle_conversion_specifier(const char **format, va_list arg_list)
-{
-	unsigned int i, num_chars_printed = 0;
-
-	switch (**format)
-	{
-		case 'C':
-		case 'c':
-			num_chars_printed += print_char(va_arg(arg_list, int));
-			break;
-		case 'S':
-		case 's':
-			num_chars_printed += print_string(va_arg(arg_list, char *));
-			break;
-		case '\0':
-			break;
-		case '%':
-			num_chars_printed += printf("%c", '%');
-			break;
-		case 'd':
-		case 'i':
-			num_chars_printed += printf("%d", va_arg(arg_list, int));
-			break;
-		case 'u':
-			i = (unsigned int) va_arg(arg_list, unsigned int);
-			num_chars_printed += printf("%u", i);
-			break;
-		case 'o':
-			num_chars_printed += printf("%o", va_arg(arg_list, int));
-			break;
-		case 'X':
-		case 'x':
-			num_chars_printed += printf("%x", va_arg(arg_list, int));
-			break;
-		case 'p':
-			num_chars_printed += printf("%p", va_arg(arg_list, void*));
-			break;
-		default:
-			num_chars_printed += printf("%%%c", **format);
-			break;
-	}
-	return (num_chars_printed);
-}
-/**
- * print_char - print a character and handle null characters
- * @c: the character to print
- * Return: number of characters printed
- */
-int print_char(char c)
-{
-	if (c)
-		putchar(c);
-	return (1);
-}
-
-/**
- * print_string - prints a string
- * @str: string to print
- * Return: number of characters printed
- */
-int print_string(char *str)
-{
-	int i, num_chars_printed = 0;
-
-	if (str == NULL)
-	{
-		return (printf("(null)"));
-	}
-
-
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		num_chars_printed += print_char(str[i]);
-	}
-
-	return (num_chars_printed);
+    va_end(ap);
+    return (len);
 }
