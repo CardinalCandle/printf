@@ -9,29 +9,24 @@
  */
 int print_unsignedToBinary(va_list arg)
 {
+	unsigned int p, n = va_arg(arg, unsigned int);
 
-unsigned int n = va_arg(arg, unsigned int);
-unsigned int printed;
-
-print_binary(n, &printed);
-print_binary(n, &printed);
-
-return (printed);
+	print_binary(n, &p);
+	print_binary(n, &p);
+	return (p);
 }
 
 
 /**
  * print_oct - prints number in octal base.
  * @arg: list containing octal number to be printed
- * Return: number of octals printed
+ * Return: number of chars
  */
-
 int print_oct(va_list arg)
 {
-	unsigned int num = va_arg(arg, unsigned int);
-	unsigned int copy;
+	unsigned int copy, num = va_arg(arg, unsigned int);
 	char *octa;
-	int i, j, charPrinted = 0;
+	int i, j, chars = 0;
 
 	if (num == 0)
 		return (_putchar('0'));
@@ -54,39 +49,39 @@ int print_oct(va_list arg)
 	for (; i < j; i++)
 	{
 		_putchar(octa[i]);
-		charPrinted++;
+		chars++;
 	}
 	free(octa);
-	return (charPrinted);
+	return (chars);
 }
 
 /**
  * print_unsignedIntToHex - prints unsigned int to hexadecimal.
  * @num: number to print
- * @_case: letter `a` on the case to print it (upper or lower)
+ * @c: char upper or lower
  * Return: number or char printed
  */
-int print_unsignedIntToHex(unsigned int num, char _case)
+int print_unsignedIntToHex(unsigned int num, char c)
 {
 	unsigned int num2;
-	int i, j, remainder, nbrCharacters = 0;
-	char *numhex;
+	int i, j, remainder, chars = 0;
+	char *hex;
 
-	for (num2 = num; num2 != 0; nbrCharacters++, num2 /= 16)
+	for (num2 = num; num2 != 0; chars++, num2 /= 16)
 	;
 
-	numhex = malloc(nbrCharacters);
+	hex = malloc(chars);
 	for (i = 0; num != 0; i++)
 	{
 		remainder = num % 16;
 		if (remainder < 10)
-			numhex[i] = remainder + '0';
+			hex[i] = remainder + '0';
 		else
-			numhex[i] = remainder - 10 + _case;
+			hex[i] = remainder - 10 + c;
 		num = num / 16;
 	}
 	for (j = i - 1; j >= 0; j--)
-		_putchar(numhex[j]);
-	free(numhex);
-	return (nbrCharacters);
+		_putchar(hex[j]);
+	free(hex);
+	return (chars);
 }

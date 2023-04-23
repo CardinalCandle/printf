@@ -16,15 +16,15 @@ int printIdentifiers(char next, va_list arg)
 
 	identifierStruct functs[] = {
 		{"c", print_char},
-		{"s", print_str},
+		{"s", print_lower},
 		{"d", print_int},
 		{"i", print_int},
 		{"u", print_unsigned},
 		{"b", print_unsignedToBinary},
 		{"o", print_oct},
-		{"x", print_hex},
-		{"X", print_HEX},
-		{"S", print_STR},
+		{"x", print_hex_lower},
+		{"X", print_hex_upper},
+		{"S", print_upper},
 		{NULL, NULL}
 	};
 
@@ -37,13 +37,12 @@ int printIdentifiers(char next, va_list arg)
 }
 
 /**
- * _printf - mimic printf from stdio
- * Description: produces output according to a format
- * write output to stdout, the standard output stream
+ * _printf - simple printf implementation from stdio
+ *	produces output according to a format
+ *	write output to stdout, the standard output stream
  * @format: character string composed of zero or more directives
- *
  * Return: the number of characters printed
- * (excluding the null byte used to end output to strings)
+ * excluded null terminator
  * return -1 for incomplete identifier error
  */
 
