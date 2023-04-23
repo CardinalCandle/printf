@@ -8,8 +8,8 @@ void print_bin(unsigned int n, unsigned int *p)
 {
 	if (n > 1)
 	{
-		*p++;
-		print_binary(n >> 1, p);
+		*p += 1;
+		print_bin(n >> 1, p);
 	}
 	_putchar((n & 1) + '0');
 }

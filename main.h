@@ -15,7 +15,7 @@ int print_upper(va_list arg);
 int print_lower(va_list arg);
 
 int print_percent(void);
-void print_binary(unsigned int n, unsigned int *printed);
+void print_bin(unsigned int n, unsigned int *p);
 int print_unsignedToBinary(va_list arg);
 int print_oct(va_list arg);
 int print_unsignedIntToHex(unsigned int num, char _case);
