@@ -14,7 +14,7 @@ int is_print(char c)
 
 /**
  * append_hex - Append ASCII in hexadecimal code to buffer
- * @buffer: Array of chars.
+ * @buffer: array
  * @i: Index at which to start appending.
  * @ascii: ASCII CODE.
  * Return: Always 3
@@ -46,8 +46,8 @@ int is_digit(char c)
 
 /**
  * convert_num - Casts a number to the specified size
- * @n: Number to be cast
- * @size: Number indicating the type to be cast
+ * @n: Number
+ * @size: size
  * Return: Cast value of num
  */
 long int convert_num(long int n, int size)
@@ -61,8 +61,8 @@ long int convert_num(long int n, int size)
 
 /**
  * convert_unsig - Casts a number to the specified size
- * @n: Number to be casted
- * @size: Number indicating the type to be casted
+ * @n: Number
+ * @size: size
  * Return: Casted value of num
  */
 long int convert_unsig(unsigned long int n, int size)

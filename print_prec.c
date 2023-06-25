@@ -2,66 +2,66 @@
 
 /**
  * get_prec - Calculates the precision for printing
- * @format: Formatted string in which to print the arguments
+ * @format: Formatted str
  * @i: arguments to be printed.
- * @list: list of arguments
+ * @list: arg list
  * Return: Precision
  */
 int get_prec(const char *format, int *i, va_list list)
 {
-	int curr_i = *i + 1;
+	int j = *i + 1;
 	int precision = -1;
 
-	if (format[curr_i] != '.')
+	if (format[j] != '.')
 		return (precision);
 	precision = 0;
-	for (curr_i += 1; format[curr_i] != '\0'; curr_i++)
+	for (j += 1; format[j] != '\0'; j++)
 	{
-		if (is_digit(format[curr_i]))
+		if (is_digit(format[j]))
 		{
 			precision *= 10;
-			precision += format[curr_i] - '0';
+			precision += format[j] - '0';
 		}
-		else if (format[curr_i] == '*')
+		else if (format[j] == '*')
 		{
-			curr_i++;
+			j++;
 			precision = va_arg(list, int);
 			break;
 		}
 		else
 			break;
 	}
-	*i = curr_i - 1;
+	*i = j - 1;
 	return (precision);
 }
 
 /**
  * get_size - gets the size to cast the argument
  * @format: Formatted str
- * @i: List of args
+ * @i: arg list
  * Return: Precision
  */
 int get_size(const char *format, int *i)
 {
-	int curr_i = *i + 1;
+	int j = *i + 1;
 	int s = 0;
 
-	if (format[curr_i] == 'l')
+	if (format[j] == 'l')
 		s = 2;
-	else if (format[curr_i] == 'h')
+	else if (format[j] == 'h')
 		s = 1;
 	if (s == 0)
-		*i = curr_i - 1;
+		*i = j - 1;
 	else
-		*i = curr_i;
+		*i = j;
 	return (s);
 }
 
 /**
  * get_wid - gets the width for printing
  * @format: Formatted str
- * @i: List of arguments
- * @list: list of arguments
+ * @i: arg list
+ * @list: arg list
  * Return: width
  */
 int get_wid(const char *format, int *i, va_list list)
@@ -78,7 +78,7 @@ int get_wid(const char *format, int *i, va_list list)
 		}
 		else if (format[j] == '*')
 		{
-			curr_i++;
+			j++;
 			w = va_arg(list, int);
 			break;
 		}

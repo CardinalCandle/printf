@@ -2,12 +2,12 @@
 
 /**
  * print_unsig - Prints an unsigned number
- * @types: List a of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width
- * @precision: Precision specification
- * @size: Size specifier
+ * @types: arg list
+ * @buffer: array
+ * @flags: active flags
+ * @width: width
+ * @precision: precision
+ * @size: size
  * Return: Number of chars printed.
  */
 int print_unsig(va_list types, char buffer[],
@@ -31,10 +31,10 @@ int print_unsig(va_list types, char buffer[],
 
 /**
  * print_oct - Prints an unsigned number in octal notation
- * @types: List of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
- * @width: get width
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Number of chars
@@ -65,10 +65,10 @@ int print_oct(va_list types, char buffer[],
 
 /**
  * print_hexdec - Prints an unsigned number in hexa (0x) notation
- * @types: List of arguments
- * @buffer: Buffer array
- * @flags:  active flags
- * @width: get width
+ * @types: arg list
+ * @buffer: array
+ * @flags: active flags
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Number of chars printed
@@ -83,10 +83,10 @@ int print_hexdec(va_list types, char buffer[],
 
 /**
  * print_hexa_upper - Prints unsigned number in hexa (upper) notation
- * @types: List of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
- * @width: get width
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Number of chars printed
@@ -100,12 +100,12 @@ int print_hexa_upper(va_list types, char buffer[],
 
 /**
  * print_hexa - Prints a hexadecimal number in lower or upper
- * @types: List of arguments
+ * @types: arg list
  * @map_to: Array of values to map to
- * @buffer: Buffer array
+ * @buffer: array
  * @flags: active flags
  * @flag_ch: active flags
- * @width: get width
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Number of chars printed

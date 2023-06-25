@@ -19,14 +19,14 @@ int _printf(const char *format, ...)
 
 	va_start(list, format);
 
-	for (i = 0; format && format[i] != '\0'; i++)
+	for (i = 0; format && format[i] != '\0'; i += 1)
 	{
 		if (format[i] != '%')
 		{
 			buffer[buff_ind++] = format[i];
 			if (buff_ind == 1024)
 				print_buff(buffer, &buff_ind);
-			printed_chars++;
+			printed_chars += 1;
 		}
 		else
 		{
@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
 
 /**
  * print_buff - Prints the contents of the buffer, so long as it exists
- * @buffer: Array of chars
+ * @buffer: array
  * @buff_ind: Index at which to add next char, in length.
  */
 void print_buff(char buffer[], int *buff_ind)
@@ -67,8 +67,8 @@ void print_buff(char buffer[], int *buff_ind)
 #include "main.h"
 
 /**
- * get_flg - Calculates active flags
- * @format: Formatted string in which to print the arguments
+ * get_flg - active flags
+ * @format: Formatted str
  * @i: parameter
  * Return: flags
  */
@@ -78,9 +78,9 @@ int get_flg(const char *format, int *i)
 	const char FLAGS_CH[] = {'-', '+', '0', '#', ' ', '\0'};
 	const int FLAGS_ARR[] = {1, 2, 4, 8, 16, 0};
 
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
+	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i += 1)
 	{
-		for (j = 0; FLAGS_CH[j] != '\0'; j++)
+		for (j = 0; FLAGS_CH[j] != '\0'; j += 1)
 			if (format[curr_i] == FLAGS_CH[j])
 			{
 				flags |= FLAGS_ARR[j];
@@ -98,48 +98,48 @@ int get_flg(const char *format, int *i)
 
 /**
  * handle_print - Prints an argument based on its type
- * @fmt: Formatted string in which to print the arguments.
- * @list: List of arguments
+ * @format: Formatted str
+ * @list: arg list
  * @ind: ind
- * @buffer: Buffer array
+ * @buffer: array
  * @flags: active flags
- * @width: get width.
+ * @width: width
  * @precision: precision
  * @size: size
  * Return: 1 or 2;
  */
-int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
+int handle_print(const char *format, int *ind, va_list list, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int i, unknow_len = 0, printed_chars = -1;
-	fmt_t fmt_types[] = {
+	format_t format_types[] = {
 		{'c', print_chr}, {'s', print_str}, {'%', print_per},
 		{'i', print_int}, {'d', print_int}, {'b', print_bin},
 		{'u', print_unsig}, {'o', print_oct}, {'x', print_hexdec},
 		{'X', print_hexa_upper}, {'p', print_ptr}, {'S', print_nonprint},
 		{'r', print_rev}, {'R', print_rot13}, {'\0', NULL}
 	};
-	for (i = 0; fmt_types[i].fmt != '\0'; i++)
-		if (fmt[*ind] == fmt_types[i].fmt)
-			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
+	for (i = 0; format_types[i].format != '\0'; i += 1)
+		if (format[*ind] == format_types[i].format)
+			return (format_types[i].fn(list, buffer, flags, width, precision, size));
 
-	if (fmt_types[i].fmt == '\0')
+	if (format_types[i].format == '\0')
 	{
-		if (fmt[*ind] == '\0')
+		if (format[*ind] == '\0')
 			return (-1);
 		unknow_len += write(1, "%%", 1);
-		if (fmt[*ind - 1] == ' ')
+		if (format[*ind - 1] == ' ')
 			unknow_len += write(1, " ", 1);
 		else if (width)
 		{
 			--(*ind);
-			while (fmt[*ind] != ' ' && fmt[*ind] != '%')
+			while (format[*ind] != ' ' && format[*ind] != '%')
 				--(*ind);
-			if (fmt[*ind] == ' ')
+			if (format[*ind] == ' ')
 				--(*ind);
 			return (1);
 		}
-		unknow_len += write(1, &fmt[*ind], 1);
+		unknow_len += write(1, &format[*ind], 1);
 		return (unknow_len);
 	}
 	return (printed_chars);

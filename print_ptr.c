@@ -2,12 +2,12 @@
 
 /**
  * print_ptr - Prints the value of a pointer variable
- * @types: List a of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width
- * @precision: Precision specification
- * @size: Size specifier
+ * @types: arg list
+ * @buffer: array
+ * @flags: active flags
+ * @width: width
+ * @precision: precision
+ * @size: size
  * Return: Number of chars printed.
  */
 int print_ptr(va_list types, char buffer[],
@@ -46,8 +46,8 @@ int print_ptr(va_list types, char buffer[],
 
 /**
  * print_nonprint - Prints ascii codes in hexa of non printable chars
- * @types: List of args
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
  * @width: width
  * @precision: Precision
@@ -81,8 +81,8 @@ int print_nonprint(va_list types, char buffer[],
 
 /**
  * print_rev - Prints string in reverse.
- * @types: List of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
  * @width: width
  * @precision: Precision
@@ -118,8 +118,8 @@ int print_rev(va_list types, char buffer[],
 
 /**
  * print_rot13 - Print a string in ceasar cipher.
- * @types: Lista of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
  * @width: width
  * @precision: Precision

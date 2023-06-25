@@ -2,12 +2,12 @@
 
 /**
  * print_chr - Prints a char
- * @types: List a of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
+ * @types: arg list
+ * @buffer: array
+ * @flags: active flags
  * @width: Width
- * @precision: Precision specification
- * @size: Size specifier
+ * @precision: precision
+ * @size: size
  * Return: Number of chars printed
  */
 int print_chr(va_list types, char buffer[],
@@ -20,10 +20,10 @@ int print_chr(va_list types, char buffer[],
 
 /**
  * print_str - Prints a string
- * @types: List a of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
- * @width: get width.
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Number of chars printed
@@ -75,10 +75,10 @@ int print_str(va_list types, char buffer[],
 
 /**
  * print_per - Prints a percent sign
- * @types: Lista of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
- * @width: get width.
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Number of chars printed
@@ -98,12 +98,12 @@ int print_per(va_list types, char buffer[],
 
 /**
  * print_int - Print int
- * @types: Lista of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width.
- * @precision: Precision specification
- * @size: Size specifier
+ * @types: arg list
+ * @buffer: array
+ * @flags: active flags
+ * @width: width
+ * @precision: precision
+ * @size: size
  * Return: Number of chars printed
  */
 int print_int(va_list types, char buffer[],
@@ -142,10 +142,10 @@ int print_int(va_list types, char buffer[],
 
 /**
  * print_bin - Prints an unsigned number
- * @types: List of arguments
- * @buffer: Buffer array
+ * @types: arg list
+ * @buffer: array
  * @flags: active flags
- * @width: get width.
+ * @width: width
  * @precision: Precision
  * @size: Size
  * Return: Numbers of characters
