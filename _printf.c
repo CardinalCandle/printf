@@ -3,9 +3,9 @@
 void print_buff(char buffer[], int *buff_ind);
 
 /**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
+ * _printf - main function
+ * @format: print format
+ * Return: Printed characters.
  */
 int _printf(const char *format, ...)
 {
@@ -26,7 +26,6 @@ int _printf(const char *format, ...)
 			buffer[buff_ind++] = format[i];
 			if (buff_ind == 1024)
 				print_buff(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
 			printed_chars++;
 		}
 		else
@@ -53,9 +52,9 @@ int _printf(const char *format, ...)
 }
 
 /**
- * print_buff - Prints the contents of the buffer if it exist
+ * print_buff - Prints the contents of the buffer, so long as it exists
  * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
+ * @buff_ind: Index at which to add next char, in length.
  */
 void print_buff(char buffer[], int *buff_ind)
 {
@@ -70,8 +69,8 @@ void print_buff(char buffer[], int *buff_ind)
 /**
  * get_flg - Calculates active flags
  * @format: Formatted string in which to print the arguments
- * @i: take a parameter.
- * Return: Flags:
+ * @i: parameter
+ * Return: flags
  */
 int get_flg(const char *format, int *i)
 {
@@ -100,13 +99,13 @@ int get_flg(const char *format, int *i)
 /**
  * handle_print - Prints an argument based on its type
  * @fmt: Formatted string in which to print the arguments.
- * @list: List of arguments to be printed.
- * @ind: ind.
- * @buffer: Buffer array to handle print.
- * @flags: Calculates active flags
+ * @list: List of arguments
+ * @ind: ind
+ * @buffer: Buffer array
+ * @flags: active flags
  * @width: get width.
- * @precision: Precision specification
- * @size: Size specifier
+ * @precision: precision
+ * @size: size
  * Return: 1 or 2;
  */
 int handle_print(const char *fmt, int *ind, va_list list, char buffer[],

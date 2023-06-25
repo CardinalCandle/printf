@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
 
 #define UF(x) (void)(x)
 
