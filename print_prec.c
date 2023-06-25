@@ -15,7 +15,7 @@ int get_prec(const char *format, int *i, va_list list)
 	if (format[j] != '.')
 		return (precision);
 	precision = 0;
-	for (j += 1; format[j] != '\0'; j++)
+	for (j += 1; format[j] != '\0'; j += 1)
 	{
 		if (is_digit(format[j]))
 		{
@@ -24,7 +24,7 @@ int get_prec(const char *format, int *i, va_list list)
 		}
 		else if (format[j] == '*')
 		{
-			j++;
+			j += 1;
 			precision = va_arg(list, int);
 			break;
 		}
@@ -69,7 +69,7 @@ int get_wid(const char *format, int *i, va_list list)
 	int j;
 	int w = 0;
 
-	for (j = *i + 1; format[j] != '\0'; j++)
+	for (j = *i + 1; format[j] != '\0'; j += 1)
 	{
 		if (is_digit(format[j]))
 		{
@@ -78,7 +78,7 @@ int get_wid(const char *format, int *i, va_list list)
 		}
 		else if (format[j] == '*')
 		{
-			j++;
+			j += 1;
 			w = va_arg(list, int);
 			break;
 		}

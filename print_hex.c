@@ -25,7 +25,7 @@ int print_unsig(va_list types, char buffer[],
 		buffer[i--] = (num % 10) + '0';
 		num /= 10;
 	}
-	i++;
+	i += 1;
 	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }
 
@@ -58,7 +58,7 @@ int print_oct(va_list types, char buffer[],
 	}
 	if (flags & 8 && init_num != 0)
 		buffer[i--] = '0';
-	i++;
+	i += 1;
 	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }
 
@@ -132,6 +132,6 @@ int print_hexa(va_list types, char map_to[], char buffer[],
 		buffer[i--] = flag_ch;
 		buffer[i--] = '0';
 	}
-	i++;
+	i += 1;
 	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }

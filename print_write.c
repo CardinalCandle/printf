@@ -28,7 +28,7 @@ int handle_write_char(char c, char buffer[],
 	if (width > 1)
 	{
 		buffer[1024 - 1] = '\0';
-		for (i = 0; i < width - 1; i++)
+		for (i = 0; i < width - 1; i += 1)
 			buffer[1024 - i - 2] = padd;
 
 		if (flags & 1)
@@ -100,12 +100,12 @@ int write_num(int ind, char buffer[],
 	if (prec > 0 && prec < length)
 		padd = ' ';
 	while (prec > length)
-		buffer[--ind] = '0', length++;
+		buffer[--ind] = '0', length += 1;
 	if (extra_c != 0)
-		length++;
+		length += 1;
 	if (width > length)
 	{
-		for (i = 1; i < width - length + 1; i++)
+		for (i = 1; i < width - length + 1; i += 1)
 			buffer[i] = padd;
 		buffer[i] = '\0';
 		if (flags & 1 && padd == ' ')
@@ -164,7 +164,7 @@ int write_unsgnd(int is_negative, int ind,
 	while (precision > length)
 	{
 		buffer[--ind] = '0';
-		length++;
+		length += 1;
 	}
 
 	if ((flags & 4) && !(flags & 1))
@@ -172,7 +172,7 @@ int write_unsgnd(int is_negative, int ind,
 
 	if (width > length)
 	{
-		for (i = 0; i < width - length; i++)
+		for (i = 0; i < width - length; i += 1)
 			buffer[i] = padd;
 
 		buffer[i] = '\0';
@@ -209,7 +209,7 @@ int write_ptr(char buffer[], int ind, int length,
 
 	if (width > length)
 	{
-		for (i = 3; i < width - length + 3; i++)
+		for (i = 3; i < width - length + 3; i += 1)
 			buffer[i] = padd;
 		buffer[i] = '\0';
 		if (flags & 1 && padd == ' ')

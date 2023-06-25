@@ -31,15 +31,15 @@ int print_ptr(va_list types, char buffer[],
 	{
 		buffer[ind--] = map_to[num_addrs % 16];
 		num_addrs /= 16;
-		length++;
+		length += 1;
 	}
 	if ((flags & 4) && !(flags & 1))
 		padd = '0';
 	if (flags & 2)
-		extra_c = '+', length++;
+		extra_c = '+', length += 1;
 	else if (flags & 16)
-		extra_c = ' ', length++;
-	ind++;
+		extra_c = ' ', length += 1;
+	ind += 1;
 	return (write_ptr(buffer, ind, length,
 		width, flags, padd, extra_c, padd_start));
 }
@@ -72,7 +72,7 @@ int print_nonprint(va_list types, char buffer[],
 			buffer[i + off] = str[i];
 		else
 			off += append_hex(str[i], buffer, i + off);
-		i++;
+		i += 1;
 	}
 
 	buffer[i + off] = '\0';
@@ -105,13 +105,13 @@ int print_rev(va_list types, char buffer[],
 		UF(precision);
 		str = ")Null(";
 	}
-	for (i = 0; str[i]; i++)
+	for (i = 0; str[i]; i += 1)
 		;
-	for (i = i - 1; i >= 0; i--)
+	for (i = i - 1; i >= 0; i -= 1)
 	{
 		z = str[i];
 		write(1, &z, 1);
-		count++;
+		count += 1;
 	}
 	return (count);
 }
@@ -145,15 +145,15 @@ int print_rot13(va_list types, char buffer[],
 
 	if (str == NULL)
 		str = "(AHYY)";
-	for (i = 0; str[i]; i++)
+	for (i = 0; str[i]; i += 1)
 	{
-		for (j = 0; in[j]; j++)
+		for (j = 0; in[j]; j += 1)
 		{
 			if (in[j] == str[i])
 			{
 				x = out[j];
 				write(1, &x, 1);
-				count++;
+				count += 1;
 				break;
 			}
 		}
@@ -161,7 +161,7 @@ int print_rot13(va_list types, char buffer[],
 		{
 			x = str[i];
 			write(1, &x, 1);
-			count++;
+			count += 1;
 		}
 	}
 	return (count);
