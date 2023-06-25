@@ -17,7 +17,6 @@ struct format
 	int (*fn)(va_list, char[], int, int, int, int);
 };
 
-
 /**
  * typedef struct format format_t - struct
  * @format: The format.
