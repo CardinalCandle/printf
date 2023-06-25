@@ -7,9 +7,7 @@
  */
 int is_print(char c)
 {
-	if (c >= 32 && c < 127)
-		return (1);
-	return (0);
+	return ((c >= 32 && c < 127) ? 1 : 0);
 }
 
 /**
@@ -39,37 +37,27 @@ int append_hex(char ascii, char buffer[], int i)
  */
 int is_digit(char c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	return ((c >= '0' && c <= '9') ? 1 : 0);
 }
 
 /**
  * convert_num - Casts a number to the specified size
  * @n: Number
- * @size: size
+ * @s: size
  * Return: Cast value of num
  */
-long int convert_num(long int n, int size)
+long int convert_num(long int n, int s)
 {
-	if (size == 2)
-		return (n);
-	else if (size == 1)
-		return ((short)n);
-	return ((int)n);
+	return ((s == 2) ? n : ((s == 1) ? (short)n : (int)n));
 }
 
 /**
  * convert_unsig - Casts a number to the specified size
  * @n: Number
- * @size: size
+ * @s: size
  * Return: Casted value of num
  */
-long int convert_unsig(unsigned long int n, int size)
+long int convert_unsig(unsigned long int n, int s)
 {
-	if (size == 2)
-		return (n);
-	else if (size == 1)
-		return ((unsigned short)n);
-	return ((unsigned int)n);
+	return ((s == 2) ? n : ((s == 1) ? (unsigned short)n : (unsigned int)n));
 }

@@ -68,32 +68,29 @@ void print_buff(char buffer[], int *buff_ind)
 
 /**
  * get_flg - active flags
- * @format: Formatted str
+ * @f: Formatted str
  * @i: parameter
  * Return: flags
  */
-int get_flg(const char *format, int *i)
+int get_flg(const char *f, int *i)
 {
-	int j, curr_i, flags = 0;
-	const char FLAGS_CH[] = {'-', '+', '0', '#', ' ', '\0'};
-	const int FLAGS_ARR[] = {1, 2, 4, 8, 16, 0};
+	int j, c, l = 0;
+	const char F[] = {'-', '+', '0', '#', ' ', '\0'};
+	const int A[] = {1, 2, 4, 8, 16, 0};
 
-	for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i += 1)
+	for (c = *i + 1; f[c] != '\0'; c += 1)
 	{
-		for (j = 0; FLAGS_CH[j] != '\0'; j += 1)
-			if (format[curr_i] == FLAGS_CH[j])
-			{
-				flags |= FLAGS_ARR[j];
-				break;
-			}
-
-		if (FLAGS_CH[j] == 0)
+	for (j = 0; F[j] != '\0'; j += 1)
+		if (f[c] == F[j])
+		{
+			l |= A[j];
+			break;
+		}
+	if (F[j] == 0)
 		break;
 	}
-
-	*i = curr_i - 1;
-
-	return (flags);
+	*i = c - 1;
+	return (l);
 }
 
 /**

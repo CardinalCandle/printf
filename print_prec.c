@@ -44,16 +44,9 @@ int get_prec(const char *format, int *i, va_list list)
 int get_size(const char *format, int *i)
 {
 	int j = *i + 1;
-	int s = 0;
+	int s = (format[j] == 'l') ? 2 : ((format[j] == 'h') ? 1 : 0);
 
-	if (format[j] == 'l')
-		s = 2;
-	else if (format[j] == 'h')
-		s = 1;
-	if (s == 0)
-		*i = j - 1;
-	else
-		*i = j;
+	*i = (s == 0) ? j - 1 : j;
 	return (s);
 }
 
